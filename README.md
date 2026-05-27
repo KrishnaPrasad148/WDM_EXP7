@@ -1,5 +1,5 @@
 ### EX7 Implementation of Link Analysis using HITS Algorithm
-### DATE: 
+### DATE: 27/05/2026
 ### AIM: To implement Link Analysis using HITS Algorithm in Python.
 ### Description:
 <div align = "justify">
@@ -32,6 +32,10 @@ in a network of web pages based on the structure of the links between them.
     <p>    Visualize using bar chart to represent authority and hub scores.
 
 ### Program:
+```
+Developed By : Krishna Prasad S
+Register No. : 212223230108
+```
 
 ```python
 import numpy as np
@@ -39,28 +43,29 @@ import matplotlib.pyplot as plt
 
 def hits_algorithm(adjacency_matrix, max_iterations=100, tol=1.0e-6):
     num_nodes = len(adjacency_matrix)
-    authority_scores = np.ones(num_nodes)
-    hub_scores = np.ones(num_nodes)
-    
+    authority_scores = np. ones(num_nodes)
+    hub_scores = np.ones (num_nodes)
+
     for i in range(max_iterations):
-        # Authority update
+        # Authority update: a = A^T * h
+        new_authority_scores = adjacency_matrix. T @ hub_scores
+        # Hub update: h = A * a
+        new_hub_scores = adjacency_matrix @ new_authority_scores
 
-             /*WRITE YOUR CODE HERE
-        
-        # Hub update
+        # Normalize scores
+        new_authority_scores /= np.linalg.norm(new_authority_scores, 2)
+        new_hub_scores /= np.linalg.norm(new_hub_scores, 2)
 
-             /*WRITE YOUR CODE HERE
-        
         # Check convergence
+        authority_diff = np.linalg.norm(new_authority_scores - authority_scores, 1)
+        hub_diff = np.linalg.norm(new_hub_scores - hub_scores, 1)
 
-             /*WRITE YOUR CODE HERE
-        
         if authority_diff < tol and hub_diff < tol:
             break
-        
+
         authority_scores = new_authority_scores
         hub_scores = new_hub_scores
-    
+
     return authority_scores, hub_scores
 
 # Example adjacency matrix (replace this with your own data)
@@ -93,5 +98,11 @@ plt.show()
 ```
 
 ### Output:
+#### Authority Scores and Hub Scores:
+<img width="549" height="79" alt="auth_scores" src="https://github.com/user-attachments/assets/90c3f226-a201-46f9-b335-b7995ed13a8a" />
+
+#### Bar Chart:
+<img width="790" height="590" alt="bar_graph" src="https://github.com/user-attachments/assets/612cd928-8d41-45b3-a88a-f70ce0a159be" />
 
 ### Result:
+Thus, the implementation of the HITS algorithm was successfully completed, and the ranking of nodes based on link structure was effectively demonstrated.
